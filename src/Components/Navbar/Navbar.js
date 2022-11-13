@@ -8,6 +8,7 @@ export default function Navbar() {
       <Link to="/">ACCUEIL</Link>
       <Link to="/produits">PRODUITS</Link>
       <Link to="/contact">CONTACT</Link>
+      <a href="https://www.skulkrone-design.fr/index.php#port">PORTFOLIO </a>
       
     </nav>
   )

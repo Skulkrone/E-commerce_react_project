@@ -33,13 +33,23 @@ export default function cartReducer(state = INTIAL_STATE, action) {
         };
       }
 
-    case "UPDATEITEM":
+    case "UPDATEITEM": {
       const indexItemUpdate = state.cart.findIndex(
         (obj) => obj.id === action.payload.id
       );
 
       const newArr = [...state.cart];
       newArr.splice(indexItemUpdate, 1, action.payload);
+
+      return {
+        cart: newArr,
+      };
+    }
+
+    case "DELETEITEM":
+      const newArr = [...state.cart].filter(
+        (obj) => obj.id !== action.payload.id
+      );
 
       return {
         cart: newArr,

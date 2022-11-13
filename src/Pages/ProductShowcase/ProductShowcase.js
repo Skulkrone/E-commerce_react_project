@@ -80,6 +80,7 @@ export default function ProductShowcase() {
             type="number"
             id="quantity"
             value={nbMugs}
+            min="1"
             onChange={updateMugs}
           />
           <button>Ajouter au panier</button>

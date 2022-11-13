@@ -5,7 +5,36 @@ import { useSelector, useDispatch } from "react-redux";
 export default function ShoppingCart() {
   const storeState = useSelector((state) => state);
 
+  const clearCart = () => {
+    for (let i = 0; i < storeState.cart.length; i++) {
+      const objDeleted = {
+        ...storeState.cart[i],
+        quantity: 0,
+      };
+
+      dispatch({
+        type: "DELETEITEM",
+        payload: objDeleted,
+      });
+    }
+  };
+
   const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    const indexItem = storeState.cart.findIndex((obj) => obj.id === id);
+    console.log(indexItem);
+
+    const objDeleted = {
+      ...storeState.cart[indexItem],
+      quantity: 0,
+    };
+
+    dispatch({
+      type: "DELETEITEM",
+      payload: objDeleted,
+    });
+  };
 
   const handleChange = (event, id) => {
     const indexItem = storeState.cart.findIndex((obj) => obj.id === id);
@@ -53,13 +82,26 @@ export default function ShoppingCart() {
                 id="quantityInput"
                 type="number"
                 value={item.quantity}
+                min="1"
               />
+            </div>
+            <div
+              className="remove-object"
+              onClick={(e) => handleDelete(item.id)}
+              key={item.id}
+            >
+              X
             </div>
           </li>
         ))}
       </ul>
       <p className="total-price">Total : {`${totalPrice.toFixed(2)}€`}</p>
-      <button className="btn-cart">Procéder au paiement</button>
+      <div className="container-btn">
+        <button className="btn-cart">Procéder au paiement</button>
+        <button className="btn-clear" onClick={clearCart}>
+          Vider le panier
+        </button>
+      </div>
     </div>
   );
 }

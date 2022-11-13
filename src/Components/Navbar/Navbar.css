@@ -17,3 +17,10 @@
     color: #f1f1f1;
     padding: 20px 20px;
 }
+
+@media screen and (max-width: 500px){
+    .nav-top{
+        width: auto;
+        flex-direction: column;
+    }
+}
